@@ -3,5 +3,10 @@
 
 <h3>Search Results</h3>
 <div class="list-group">
-    <search-results></search-results>
+    <!--This is the child, the directive was able to access its parent scope by default. The directive can affect the data in the
+    parent scope, it could be dangerous. Angularjs provides a method to isolate the directive, the model part of the directive for the 
+    model form of the html that contains the directive. This is called isolate scope. To isolate the scope we define a property scope in
+    the directive.
+    I'm creating a hole in the directive with attribite person-name and I'm saying person.name its the value from my scope -->
+    <search-results person-name="{{ person.name }}"></search-results>
 </div>

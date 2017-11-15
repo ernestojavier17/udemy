@@ -24,7 +24,7 @@ myApp.config(function ($routeProvider) {
 myApp.controller('mainController', ['$scope', '$log', function($scope, $log) {
     
     /*No longer works, because we isolate the scope in the directive defining the scope property, we have to create a hole in the directive in
-    order to access this scope person value*/
+    order to access this scope person value */
     $scope.person = {
         name: 'John Doe',
         address: '555 Main St., New York, NY 11111'
@@ -47,7 +47,9 @@ myApp.directive("searchResults", function() {
         //its own model and its own view. This isn't even a child scope, this is its own scope. It has no idea of whats going in the scope of 
         //the page that contains this directive.
         scope: {
-            
+            //I'm telling the directive that I want to create a hole through the attribute person-name in the element (normalized to personName),
+            //and the "@" means that is text.
+            personName: "@"
         }
     }
 });
