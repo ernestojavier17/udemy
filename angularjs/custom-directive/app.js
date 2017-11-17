@@ -27,9 +27,17 @@ myApp.controller('mainController', ['$scope', '$log', function($scope, $log) {
     order to access this scope person value */
     $scope.person = {
         name: 'John Doe',
-        address: '555 Main St., New York, NY 11111'
+        address: '555 Main St.',
+        city: "New York",
+        state: "NY",
+        zip: "11111",
+        email: "john.doe@yahoo.com"
     } 
     
+    $scope.formattedAddress = function(person) {
+        console.log('formattedAddressFunction');
+        return person.address + ', ' + person.city + ', ' + person.state + ' ,' + person.zip;
+    }
     
     
 }]);
@@ -49,7 +57,13 @@ myApp.directive("searchResults", function() {
         scope: {
             //I'm telling the directive that I want to create a hole through the attribute person-name in the element (normalized to personName),
             //and the "@" means that is text.
-            personName: "@"
+            personName: "@",
+            personAddress: '@',
+            //We're passing the object person through the attribute person-object. And this is a two way binding, whatever happpens to this objects
+            //inside the directive will update the object that is pass it from the outside ('mainController'), but it will allow to pass the object down to the directive
+            personObject: "=",
+            //'&' used to speficy passing a function
+            formattedAddressFunction: "&"
         }
     }
 });

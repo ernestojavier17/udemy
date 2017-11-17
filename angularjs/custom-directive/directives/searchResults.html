@@ -2,6 +2,14 @@
 <!--    <h4 class="list-group-item-heading">{{ person.name }}</h4>
     <p class="list-group-item-text">{{ person.address }}</p>
     This {{person.name}} is not longer available because I isolated the scope -->
-    <h4 class="list-group-item-heading">personName</h4>
-    <p class="list-group-item-text">{{ person.address }}</p>
+    <h4 class="list-group-item-heading">{{ personName }}</h4>
+    <!--<p class="list-group-item-text">{{ person.address }}</p>-->
+    <!--we replace person.address to personAddres as define in the directive and {{ person.address }} is 
+    as an attribute in the element <search-results person-address="{{ person.address }}" -->
+    <p class="list-group-item-text">{{ personAddress }}</p>
+    <p class="list-group-item-text">{{ personObject.email }}</p>
+    <!-- We can't use to pass a function {{formattedAddressFunction()}} because the way angularjs makes the references 
+    formattedAddressFunction(person) rather than this we pass a mapping object { person:personObject } -->
+    <p class="list-group-item-text">{{ formattedAddressFunction({ person: personObject }) }}</p>
+    
 </a>
