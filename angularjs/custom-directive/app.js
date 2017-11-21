@@ -64,6 +64,48 @@ myApp.directive("searchResults", function() {
             personObject: "=",
             //'&' used to speficy passing a function
             formattedAddressFunction: "&"
+        },
+        //Compile expects is value to be a function, and when Angularjs runs that function it will pass that function two parameters. element and attributes of the piece
+        //of html, piece of the dom that defines the directive.
+        compile: function(elem, attrs) {
+            console.log('Compiling...');
+            //This will print what is inside the <a>, when we compile we can gain access to the html that defines the view for the directive
+            console.log(elem.html());
+            
+            //The returning object can have two properties: pre (pre-linkng) and post(post-linking)
+            //We're running this directives three times because of the ng-repeat and each time, it has its own scope. Every time that loop runs, I get a new instance of searchResult
+            //with personObject as part of the scope. Essentialy, I have a model and a view three times. But compile only runs once
+            //The linking functions what they do is let me change the html and access it as each directive is created a long the way.
+            //Compile means I can change my directive on the fly before it gets used
+            return {
+                //The pre is also a function and it takes three elements, the scope, the element or elements involved and the attibutes for the html that's just been geenerated 
+                //by creating the instance of the directive
+                pre: function(scope, elements, attrs) {
+/*                    console.log('Pre-linking...');
+                    console.log(elements);*/
+                },
+                post: function(scope, elements, attrs) {
+                    console.log('Post-linking...');
+                    console.log(scope);
+                    console.log(elements);
+                }
+            }
         }
     }
+});
+
+myApp.directive("fileChange", function() {
+                
+    return {
+        compile: function(elem, attrs) {
+
+            return {
+                post: function(scope, elements, attrs) {
+                    console.log('FileChange...');
+                    console.log(scope);
+                    
+                }
+            }
+        }            
+    }                            
 });
